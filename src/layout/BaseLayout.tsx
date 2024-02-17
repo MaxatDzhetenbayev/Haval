@@ -1,25 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { Header } from "../components/Header/Header";
 
 export const BaseLayout = () => {
   return (
     <div>
-      <header>
-        <img src="logo.png" alt="Логотип" />
-        <section>
-          <nav>
-            <ul>
-              <li>Модели</li>
-              <li>Новости</li>
-              <li>Владельцам</li>
-              <li>Покупателям</li>
-              <li>Контакты</li>
-            </ul>
-          </nav>
-          <section>
-            <p>kz</p>
-          </section>
-        </section>
-      </header>
+      <Header />
       <main>
         <Outlet />
       </main>

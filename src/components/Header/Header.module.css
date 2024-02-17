@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1460px;
+  margin: 0 auto;
+  height: 120px;
+}
+
+.logo {
+  width: 281px;
+  height: 34px;
+}
+
+.header_content {
+  display: flex;
+  gap: 100px;
+}
+
+.nav_list {
+  display: flex;
+  gap: 20px;
+}
