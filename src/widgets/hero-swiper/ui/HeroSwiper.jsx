@@ -8,8 +8,8 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper/modules";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { Box, Container, Typography, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const swiperList = [
   {
@@ -50,6 +50,8 @@ const swiperList = [
 ];
 
 export const HeroSwiper = () => {
+  const theme = useTheme();
+
   return (
     <Swiper
       pagination={{
@@ -85,7 +87,16 @@ export const HeroSwiper = () => {
               <Typography variant="body1" fontSize="46px">
                 от {item.price.toLocaleString()} тг.
               </Typography>
-              <Link variant="contained" sx={{ padding: "10px 40px", color: "" }}>
+              <Link
+                to={item.path}
+                style={{
+                  marginTop: "20px",
+                  padding: "10px 40px",
+                  fontSize: "1.5rem",
+                  backgroundColor: theme.palette.primary.main,
+                  borderRadius: "5px",
+                }}
+              >
                 Подробнее
               </Link>
             </Container>
