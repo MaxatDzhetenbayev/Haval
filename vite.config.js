@@ -15,6 +15,7 @@ export default defineConfig({
       "@widgets": path.resolve(__dirname, "./src/widgets"),
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@layouts": path.resolve(__dirname, "./src/app/layouts"),
+      "@shared": path.resolve(__dirname, "./src/app/shared"),
     },
   },
 });

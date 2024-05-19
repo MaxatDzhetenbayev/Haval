@@ -63,7 +63,7 @@ export const HeroSwiper = () => {
       {swiperList.map((item, index) => (
         <SwiperSlide key={index}>
           <Box
-            style={{
+            sx={{
               backgroundImage: `url(${item.image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",

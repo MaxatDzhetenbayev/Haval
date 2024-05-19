@@ -9,7 +9,8 @@
       "@components/*": ["src/shared/components/*"],
       "@widgets/*": ["src/widgets/*"],
       "@assets/*": ["src/assets/*"],
-      "@layouts/*": ["src/app/layouts/*"]
+      "@layouts/*": ["src/app/layouts/*"],
+      "@shared/*": ["src/app/shared/*"]
     }
   }
 }

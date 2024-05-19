@@ -3,17 +3,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const ModelCard = ({ item }) => {
-  const { title, price, image, path } = item;
+  const { modelName, price, mainImage, id } = item;
   return (
-    <Link to={path} style={{ flexGrow: 1, flexBasis: "250px" }}>
+    <Link to={"/models/" + id}>
       <Card sx={{ padding: "20px" }}>
         <img
-          src={image}
-          alt={title}
-          style={{ width: "100%", maxHeight: "100px" }}
+          src={mainImage}
+          alt={modelName}
+          style={{ width: "100%", maxHeight: "200px" }}
         />
-        <Typography variant="h5">{title}</Typography>
-        <Typography variant="body1">от {price.toLocaleString()}</Typography>
+        <Typography variant="h4" sx={{ fontWeight: "600" }}>
+          {modelName}
+        </Typography>
+        <Typography variant="body1" sx={{ fontSize: "18px" }}>
+          от {price.toLocaleString()} тг
+        </Typography>
+        <Typography variant="h6">Подробнее о модели</Typography>
       </Card>
     </Link>
   );

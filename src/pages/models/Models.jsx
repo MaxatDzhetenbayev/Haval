@@ -1,7 +1,11 @@
-import React from 'react'
+import { ModelsList } from "@/widgets";
+import { Container } from "@mui/material";
+import React from "react";
 
 export const Models = () => {
   return (
-	 <div>Models</div>
-  )
-}
+    <Container>
+      <ModelsList />
+    </Container>
+  );
+};

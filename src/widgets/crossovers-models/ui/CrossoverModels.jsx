@@ -1,31 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BaseModels } from "@/widgets/base-models";
+import { crossoversModelAPi } from "../api/crossoversModelAPi";
 export const CrossoverModels = () => {
-  const items = {
-    title: "Кроссоверы и внедорожники",
-    models: [
-      {
-        title: "Model 1",
-        price: 1000,
-        image: "https://via.placeholder.com/150",
-      },
-      {
-        title: "Model 2",
-        price: 1000,
-        image: "https://via.placeholder.com/150",
-      },
-      {
-        title: "Model 3",
-        price: 1000,
-        image: "https://via.placeholder.com/150",
-      },
-      {
-        title: "Model 4",
-        price: 1000,
-        image: "https://via.placeholder.com/150",
-      },
-    ],
-  };
+  const [models, setModels] = useState(null);
 
-  return <BaseModels items={items} />;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    crossoversModelAPi().then((data) => {
+      setModels(data);
+      setLoading(false);
+    });
+  }, []);
+
+  console.log(models);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return <BaseModels items={models} />;
 };

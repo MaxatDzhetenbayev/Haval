@@ -1,6 +1,6 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Models, News, Stocks } from "@pages/index";
+import { Admin, Home, Models, News, Product, Stocks } from "@pages/index";
 import { BaseLayout } from "@layouts/BaseLayout";
 
 function App() {
@@ -21,10 +21,18 @@ function App() {
           element: <Models />,
         },
         {
+          path: "/models/:id",
+          element: <Product />,
+        },
+        {
           path: "stocks",
           element: <Stocks />,
         },
       ],
+    },
+    {
+      path: "/admin",
+      element: <Admin />,
     },
   ]);
 
