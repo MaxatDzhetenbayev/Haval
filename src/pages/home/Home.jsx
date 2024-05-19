@@ -1,4 +1,4 @@
-import { ModelsList, HeroSwiper, SpecialOffers } from "@/widgets";
+import { ModelsList, HeroSwiper, SpecialOffers, Location } from "@/widgets";
 import { Box } from "@mui/material";
 import React from "react";
 
@@ -8,6 +8,7 @@ export const Home = () => {
       <HeroSwiper />
       <ModelsList />
       <SpecialOffers />
+      <Location />
     </Box>
   );
 };
