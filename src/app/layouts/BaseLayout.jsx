@@ -1,3 +1,4 @@
+import { Footer } from "@/widgets";
 import { Box } from "@mui/material";
 import { Header } from "@widgets/header";
 import React from "react";
@@ -9,6 +10,7 @@ export const BaseLayout = () => {
       <Box>
         <Outlet />
       </Box>
+      <Footer />
     </>
   );
 };

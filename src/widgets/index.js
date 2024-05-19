@@ -7,3 +7,4 @@ export { ModelsList } from "./models-list";
 export { SpecialOffers } from "./special-offers";
 export { Location } from "./location";
 export { VisitorsAccordion } from "./visitors-accardion";
+export { Footer } from "./footer";
