@@ -6,3 +6,4 @@ export { HeroSwiper } from "./hero-swiper";
 export { ModelsList } from "./models-list";
 export { SpecialOffers } from "./special-offers";
 export { Location } from "./location";
+export { VisitorsAccordion } from "./visitors-accardion";
