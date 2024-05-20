@@ -1,6 +1,6 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Admin, Home, Models, News, Product, Stocks } from "@pages/index";
+import { Admin, Home, Models, News, Product, TestDrive } from "@pages/index";
 import { BaseLayout } from "@layouts/BaseLayout";
 import { AdminLayout } from "./layouts/AdminLayout";
 
@@ -26,9 +26,10 @@ function App() {
           element: <Product />,
         },
         {
-          path: "stocks",
-          element: <Stocks />,
-        },
+          path: "/test-drive",
+          element: <TestDrive />,
+        }
+
       ],
     },
     {
