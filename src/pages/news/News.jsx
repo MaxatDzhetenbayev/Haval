@@ -1,7 +1,10 @@
+import { Container } from '@mui/material'
 import React from 'react'
 
 export const News = () => {
   return (
-	 <div>News</div>
+	 <Container>
+
+   </Container>
   )
 }
