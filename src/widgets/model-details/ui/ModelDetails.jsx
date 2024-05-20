@@ -112,13 +112,12 @@ const TableRowComponent = ({ row }) => {
 };
 
 export const ModelDetails = ({ model }) => {
-  const { id, modelName, price, mainImage, specifications } = model;
+  const { id, modelName, price, mainVideo, specifications } = model;
 
   return (
     <Box>
       <Box
         sx={{
-          backgroundImage: `url("${mainImage}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -128,6 +127,16 @@ export const ModelDetails = ({ model }) => {
           fontSize: "2rem",
         }}
       >
+        <video muted loop autoPlay style={{
+          width: "100%",
+          height: "80vh",
+          objectFit: "cover",
+          position: "absolute",
+          zIndex: "-1",
+        
+        }}>
+          <source type="video/mp4" src={mainVideo}/>
+        </video>
         <Container>
           <Box paddingTop="100px">
             <Typography variant="h1" sx={{ fontWeight: "400" }}>
