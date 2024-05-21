@@ -1,118 +1,101 @@
-import { KeyboardArrowUp } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Collapse,
   Container,
-  IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
-const modelEquipmentList = ["COMFORT", "ELITE", "PREMIUM", "TECH PLUS"];
-const tableData = [
-  {
-    title: "КОМПЛЕКТАЦИЯ",
-    data: [
-      {
-        title: "ДВИГАТЕЛЬ 2.0T 2WD",
-        list: ["11 990 000", "12 890 000", "113 390 000", "14 390 000"],
-      },
-      {
-        title: "ДВИГАТЕЛЬ 2.0T 4WD",
-        list: ["11 990 000", "12 890 000", "113 390 000", "14 390 000"],
-      },
-    ],
-  },
-  {
-    title: "Экстерьер",
-    data: [
-      {
-        title: "Панорамная крыша с люком",
-        list: [false, false, true, true],
-      },
-      {
-        title: "Электропривод двери багажника с сенсором",
-        list: [false, false, true, true],
-      },
-      {
-        title: "Хромированная окантовка дверей",
-        list: [false, false, false, true],
-      },
-      {
-        title: "Боковая подножка",
-        list: [false, false, false, true],
-      },
-    ],
-  },
-];
+const CarConfigurations = ({ configurations }) => {
+  const renderEngineOptions = () => {
+    const engines = {};
+    configurations.forEach(config => {
+      config.engineOptions.forEach(engine => {
+        if (!engines[engine.name]) engines[engine.name] = {};
+        engines[engine.name][config.name] = engine.price;
+      });
+    });
 
-const TableRowComponent = ({ row }) => {
-  const [open, setOpen] = useState(false);
+    return (
+      <Table>
+        <TableHead>
+          <TableRow sx={{ backgroundColor: "#eee", display: "grid", gridTemplateColumns: "3fr 1fr 1fr" }}>
+            <TableCell>Комплектация</TableCell>
+            {configurations.map(config => (
+              <TableCell sx={{ textAlign: "center" }} key={config.name}>{config.name}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {Object.keys(engines).map(engineName => (
+            <TableRow key={engineName} sx={{ display: "grid", gridTemplateColumns: "3fr 1fr 1fr" }}>
+              <TableCell>{engineName}</TableCell>
+              {configurations.map(config => (
+                <TableCell sx={{ textAlign: "center" }} key={config.name}>{engines[engineName][config.name] ? engines[engineName][config.name].toLocaleString() : '-'}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  };
 
-  const handleClick = () => {
-    setOpen(!open);
+  const renderFeatures = () => {
+    const featureCategories = {};
+    configurations.forEach(config => {
+      Object.keys(config.feauteres).forEach(category => {
+        if (!featureCategories[category]) featureCategories[category] = {};
+        Object.keys(config.feauteres[category]).forEach(feature => {
+          if (!featureCategories[category][feature]) featureCategories[category][feature] = {};
+          featureCategories[category][feature][config.name] = config.feauteres[category][feature];
+        });
+      });
+    });
+
+    return Object.keys(featureCategories).map(category => (
+      <Table>
+        <TableHead >
+          <TableRow sx={{ backgroundColor: "#eee", display: "grid", gridTemplateColumns: "3fr 1fr 1fr" }}>
+            <TableCell>{category}</TableCell>
+            {configurations.map(config => (
+              <TableCell sx={{ textAlign: "center" }} key={config.name}>{config.name}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {Object.keys(featureCategories[category]).map(featureName => (
+            <TableRow sx={{ display: "grid", gridTemplateColumns: "3fr 1fr 1fr" }} key={featureName}>
+              <TableCell sx={{ flexGrow: 2 }} >{featureName}</TableCell>
+              {configurations.map(config => (
+                <TableCell sx={{ textAlign: "center", flexGrow: 1 }} key={config.name}>{featureCategories[category][featureName][config.name] ? 'Да' : '-'}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+
+      </Table>
+    ));
   };
 
   return (
-    <React.Fragment key={row.title}>
-      <TableRow sx={{ cursor: "pointer" }} onClick={handleClick}>
-        <TableCell component="th" scope="row">
-          {row.title}
-        </TableCell>
-        <TableCell align="right">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={handleClick}
-          >
-            <KeyboardArrowUp />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell></TableCell>
-                    {modelEquipmentList.map((equipment) => (
-                      <TableCell align="center">{equipment}</TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.data.map((dataRow, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{dataRow.title}</TableCell>
-                      {dataRow.list.map((data) => (
-                        <TableCell align="center">
-                          {typeof data === "string" ? data : data ? "+" : ""}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
+    <Box>
+      {renderEngineOptions()}
+      {renderFeatures()}
+    </Box>
   );
 };
 
-export const ModelDetails = ({ model }) => {
-  const { id, modelName, price, mainVideo, specifications } = model;
+
+export const ModelDetails = ({ carInfo }) => {
+
+  const { name, video, specifications, configurations } = carInfo;
+
+
 
   return (
     <Box>
@@ -133,14 +116,14 @@ export const ModelDetails = ({ model }) => {
           objectFit: "cover",
           position: "absolute",
           zIndex: "-1",
-        
+
         }}>
-          <source type="video/mp4" src={mainVideo}/>
+          <source type="video/mp4" src={video} />
         </video>
         <Container>
           <Box paddingTop="100px">
             <Typography variant="h1" sx={{ fontWeight: "400" }}>
-              {modelName}
+              {name}
             </Typography>
             <Button
               variant="contained"
@@ -178,44 +161,41 @@ export const ModelDetails = ({ model }) => {
               gap: "40px",
             }}
           >
-            {specifications.map((spec) => (
-              <Box
-                key={spec.id}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                }}
-              >
-                <Typography
-                  variant="body1"
+            {
+              Object.entries(specifications).map(([key, value]) => (
+                <Box
+                  key={key}
                   sx={{
-                    fontWeight: "400",
-                    flex: 1,
-                    color: "#AAAAAA",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
                   }}
                 >
-                  {spec.specification}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ flex: 1, textAlign: "right" }}
-                >
-                  {spec.content}
-                </Typography>
-              </Box>
-            ))}
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: "400",
+                      flex: 1,
+                      color: "#AAAAAA",
+                    }}
+                  >
+                    {key}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ flex: 1, textAlign: "right" }}
+                  >
+                    {value}
+                  </Typography>
+                </Box>
+              ))
+            }
+          </Box>
+          <Box sx={{ padding: "50px 0px" }}>
+            <Typography variant="h6" sx={{ fontWeight: "600" }}>{String(`КОМПЛЕКТАЦИИ И ЦЕНЫ ${name}`).toUpperCase()}</Typography>
+            <CarConfigurations configurations={configurations} />
           </Box>
         </Box>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableBody>
-              {tableData.map((row) => (
-                <TableRowComponent row={row} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
       </Container>
     </Box>
   );
