@@ -105,7 +105,6 @@ export const ModelDetails = ({ carInfo }) => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "80vh",
-
           color: "white",
           fontSize: "2rem",
         }}
@@ -142,7 +141,7 @@ export const ModelDetails = ({ carInfo }) => {
         </Container>
       </Box>
       <Container>
-        <Box sx={{ padding: "50px" }}>
+        <Box sx={{ padding: "50px 0px" }}>
           <Typography
             variant="h6"
             sx={{
@@ -167,6 +166,7 @@ export const ModelDetails = ({ carInfo }) => {
                   key={key}
                   sx={{
                     display: "flex",
+                    flexWrap: "wrap",
                     justifyContent: "space-between",
                     alignItems: "flex-start",
                   }}

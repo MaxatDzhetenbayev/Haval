@@ -1,15 +1,19 @@
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../shared/api/firebaseConfig"; // Убедись, что путь к файлу firebaseConfig правильный
+import { db } from "../../../shared/api/firebaseConfig";
 
 export const crossoversModelAPi = async () => {
-  const modelCollectionRef = collection(db, "models"); // Исправлено название переменной
+  const carsCollectionRef = collection(db, "cars");
 
-  const modelDocs = await getDocs(modelCollectionRef);
+  const carsDocs = await getDocs(carsCollectionRef);
 
-  const models = modelDocs.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
+
+
+  const cars = await Promise.all(carsDocs.docs.map(async (doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
   }));
 
-  return models;
+  return cars;
 };

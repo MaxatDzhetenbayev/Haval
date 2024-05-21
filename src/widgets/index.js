@@ -8,4 +8,4 @@ export { SpecialOffers } from "./special-offers";
 export { Location } from "./location";
 export { VisitorsAccordion } from "./visitors-accardion";
 export { Footer } from "./footer";
-export { getProductDetails } from "./model-details";
+export { getCarDetails } from "./model-details";

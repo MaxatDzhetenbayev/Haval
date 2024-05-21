@@ -14,7 +14,6 @@ export const CrossoverModels = () => {
     });
   }, []);
 
-  console.log(models);
   if (loading) {
     return <div>Loading...</div>;
   }
