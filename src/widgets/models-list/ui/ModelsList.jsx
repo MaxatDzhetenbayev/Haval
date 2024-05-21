@@ -14,7 +14,6 @@ export const ModelsList = () => {
         Haval, адаптированные к казахстанским условиям.
       </Typography>
       <CrossoverModels />
-      {/* <PickupsModels /> */}
     </Box>
   );
 };
