@@ -1,8 +1,11 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Admin, Home, Models, News, Product, TestDrive } from "@pages/index";
+import { Home, Models, News, Product, TestDrive } from "@pages/index";
 import { BaseLayout } from "@layouts/BaseLayout";
 import { AdminLayout } from "./layouts/AdminLayout";
+import { AdminSignIn } from "@/widgets/admin-sign-in/ui/AdminSignIn";
+import { CreateCar } from "@/pages/admin/CreateCar";
+import { CreateNews } from "@/pages/admin/CreateNews";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,16 +31,23 @@ function App() {
         {
           path: "/test-drive",
           element: <TestDrive />,
-        }
-
+        },
+        {
+          path: "/signin",
+          element: <AdminSignIn />,
+        },
       ],
     },
     {
       element: <AdminLayout/>,
       children: [
         {
-          path: "/admin",
-          element: <Admin />,
+          path: "/admin/create-car",
+          element: <CreateCar />,
+        },
+        {
+          path: "/admin/create-news",
+          element: <CreateNews />,
         },
       ]
     },

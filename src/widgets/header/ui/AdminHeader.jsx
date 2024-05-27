@@ -5,7 +5,7 @@ export const AdminHeader = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography>Админ парнель Haval</Typography>
+        <Typography>Админ панель Haval</Typography>
       </Toolbar>
     </AppBar>
   );
