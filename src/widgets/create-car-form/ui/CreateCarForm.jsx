@@ -1,27 +1,17 @@
 import {
   Box,
   Button,
+  Divider,
   MenuItem,
   Paper,
   Select,
   TextField,
   Typography,
 } from "@mui/material";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import { fetchCreateCar } from "../api/CreateCarApi";
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+import { UploadButton } from "@/app/feauters";
+
 
 const specificationTags = [
   "Тип двигателя",
@@ -72,62 +62,57 @@ export const CreateCarForm = () => {
     await fetchCreateCar({
       modelInfo: carInfo,
       specifications: carSpecifications,
-		configurations: carConfigurations
+      configurations: carConfigurations
     });
   };
 
 
+
+  const handleUploadMainImage = (url) => {
+    setCarInfo((prev) => ({ ...prev, image: url }))
+    console.log("image")
+  };
+
+  const handleUploadCardImage = (url) => {
+    setCarInfo((prev) => ({ ...prev, cardImage: url }))
+    console.log("card")
+
+  };
+
+  const handleUploadVideo = (url) => {
+    setCarInfo((prev) => ({ ...prev, video: url }))
+    console.log("video")
+
+  };
+
+  console.log(carInfo)
+
+
   return (
     <form onSubmit={handleCreateCar}>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <Typography>Основная информация</Typography>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "20px", padding: "30px 0px 0px" }}>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>Основная информация</Typography>
         <TextField
+          required
           placeholder="Название модели машины"
           helperText="Введите название модели машины"
           variant="standard"
           value={carInfo.name}
           onChange={(e) => setCarInfo({ ...carInfo, name: e.target.value })}
         />
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-          onChange={(e) => setCarInfo({ ...carInfo, image: e.target.files[0] })}
-        >
-          Загрузить главную картинку модели
-          <VisuallyHiddenInput type="file" />
-        </Button>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-          onChange={(e) =>
-            setCarInfo({ ...carInfo, cardImage: e.target.files[0] })
-          }
-        >
-          Загрузить картинку для карточки модели
-          <VisuallyHiddenInput type="file" />
-        </Button>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-          onChange={(e) => setCarInfo({ ...carInfo, video: e.target.files[0] })}
-        >
-          Загрузить видео для модели
-          <VisuallyHiddenInput type="file" />
-        </Button>
+        <Paper elevation={2} sx={{ display: "flex", flexDirection: "column", gap: "20px", padding: "20px" }}>
+          <Typography variant="h4" sx={{ textAlign: "center" }}>Изображения</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "15px", flexWrap: "wrap" }}>
+            <UploadButton onUploadComplete={handleUploadMainImage}>Загрузить главную картинку</UploadButton>
+            <UploadButton onUploadComplete={handleUploadCardImage}>Загрузить картинку карточки</UploadButton>
+            <UploadButton onUploadComplete={handleUploadVideo}>Загрузить видео</UploadButton>
+          </Box>
+        </Paper>
       </Box>
-      <Box sx={{ marginTop: "30px" }}>
-        <Typography>Основные характеристики</Typography>
-        <Box>
-          <Typography>Добавление характеристики</Typography>
+      <Paper elevation={2} sx={{ marginTop: "30px" }}>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>Основные характеристики</Typography>
+        <Box sx={{ padding: "20px" }}>
+          <Typography variant="h5" sx={{ textAlign: "center" }}>Добавление характеристики</Typography>
           <Select
             value={selectedSpecification}
             onChange={(e) => setSelectedSpecification(e.target.value)}
@@ -151,8 +136,7 @@ export const CreateCarForm = () => {
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           {Object.entries(carSpecifications).map(([key, value]) => (
-            <Paper
-              elevation={1}
+            <Box
               key={key}
               sx={{
                 display: "flex",
@@ -186,195 +170,199 @@ export const CreateCarForm = () => {
               >
                 Удалить характиристику
               </Button>
-            </Paper>
+            </Box>
           ))}
         </Box>
-      </Box>
-      <Box>
-        <Box>
-          <Typography>Добавление конфигурации</Typography>
+        <Divider />
+        <Box sx={{ padding: "20px" }}>
           <Box>
-            <Select
-              value={selectedConfiguration}
-              onChange={(e) => setSelectedConfiguration(e.target.value)}
-            >
-              {configurationTags.map((tag) => (
-                <MenuItem key={tag} value={tag}>
-                  {tag}
-                </MenuItem>
-              ))}
-            </Select>
-            <Button
-              onClick={() =>
-                setCarConfigurations((prev) => [
-                  ...prev,
-                  {
-                    name: selectedConfiguration,
-                    engineOptions: [],
-                    features: {},
-                  },
-                ])
-              }
-            >
-              Добавить конфигурацию
-            </Button>
-          </Box>
-          <Box>
-            {carConfigurations.map((item) => (
-              <Paper
-                key={item.name}
-                elevation={1}
-                sx={{ padding: "20px 10px" }}
+            <Typography variant="h5" sx={{ textAlign: "center" }}>Добавление конфигурации</Typography>
+            <Box>
+              <Select
+                value={selectedConfiguration}
+                onChange={(e) => setSelectedConfiguration(e.target.value)}
               >
-                <Typography sx={{ textAlign: "center" }}>
-                  Конфигурация - {item.name}
-                </Typography>
-                <Box>
-                  <TextField
-                    placeholder="Название двигателя"
-                    value={engineOption.name}
-                    onChange={(e) =>
-                      setEngineOption({ ...engineOption, name: e.target.value })
-                    }
-                  />
-                  <TextField
-                    placeholder="Цена двигателя"
-                    value={engineOption.price}
-                    onChange={(e) =>
-                      setEngineOption({
-                        ...engineOption,
-                        price: e.target.value,
-                      })
-                    }
-                  />
-                  <Button
-                    onClick={() => {
-                      setCarConfigurations((prev) => [
-                        ...prev.filter((config) => config.name !== item.name),
-                        {
-                          ...item,
-                          engineOptions: [...item.engineOptions, engineOption],
-                        },
-                      ]);
-                      setEngineOption({ name: "", price: 0 });
-                    }}
-                  >
-                    Добавить двигатель
-                  </Button>
-                </Box>
-                <Box sx={{ borderBottom: "1px solid #000" }}>
-                  <Box>
-                    <Select
-                      value={selectedFeature}
-                      onChange={(e) => setSelectedFeature(e.target.value)}
-                    >
-                      {configFeauteresTags.map((tag) => (
-                        <MenuItem key={tag} value={tag}>
-                          {tag}
-                        </MenuItem>
-                      ))}
-                    </Select>
+                {configurationTags.map((tag) => (
+                  <MenuItem key={tag} value={tag}>
+                    {tag}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Button
+                sx={{
+
+                }}
+                onClick={() =>
+                  setCarConfigurations((prev) => [
+                    ...prev,
+                    {
+                      name: selectedConfiguration,
+                      engineOptions: [],
+                      features: {},
+                    },
+                  ])
+                }
+              >
+                Добавить конфигурацию
+              </Button>
+            </Box>
+            <Box >
+              {carConfigurations.map((item) => (
+                <Box
+                  key={item.name}
+                  sx={{ padding: "20px 10px" }}
+                >
+                  <Typography sx={{ textAlign: "center" }}>
+                    Конфигурация - {item.name}
+                  </Typography>
+                  <Box sx={{ marginTop: "40px" }}>
                     <TextField
-                      placeholder="Введите значение конфигураций"
-                      value={feautereValue}
-                      onChange={(e) => setFeautereValue(e.target.value)}
+                      placeholder="Название двигателя"
+                      value={engineOption.name}
+                      onChange={(e) =>
+                        setEngineOption({ ...engineOption, name: e.target.value })
+                      }
+                    />
+                    <TextField
+                      placeholder="Цена двигателя"
+                      value={engineOption.price}
+                      onChange={(e) =>
+                        setEngineOption({
+                          ...engineOption,
+                          price: e.target.value,
+                        })
+                      }
                     />
                     <Button
-                      onClick={() =>
+                      onClick={() => {
                         setCarConfigurations((prev) => [
                           ...prev.filter((config) => config.name !== item.name),
                           {
                             ...item,
-                            features: {
-                              ...item.features,
-                              [selectedFeature]: {
-                                ...item.features[selectedFeature],
-                                [feautereValue]: false,
-                              },
-                            },
+                            engineOptions: [...item.engineOptions, engineOption],
                           },
-                        ])
-                      }
+                        ]);
+                        setEngineOption({ name: "", price: 0 });
+                      }}
                     >
-                      Добавить конфигурацию
+                      Добавить двигатель
                     </Button>
                   </Box>
-                  <Box>
-                    {Object.entries(item.features).map(([key, value]) => {
-                      return (
-                        <Box key={key} sx={{}}>
-                          <Typography>{key}</Typography>
-                          <Box>
-                            {Object.keys(value).map((feature) => (
-                              <Box
-                                key={feature}
-                                sx={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  alignItems: "center",
-                                  padding: "10px 0",
-                                }}
-                              >
-                                <Typography>{feature}</Typography>
-                                <Button
-                                  onClick={() =>
-                                    setCarConfigurations((prev) => [
-                                      ...prev.filter(
-                                        (config) => config.name !== item.name
-                                      ),
-                                      {
-                                        ...item,
-                                        features: {
-                                          ...item.features,
-                                          [selectedFeature]: {
-                                            ...item.features[selectedFeature],
-                                            [feautereValue]:
-                                              !item.features[selectedFeature][
-                                                feautereValue
-                                              ],
-                                          },
-                                        },
-                                      },
-                                    ])
-                                  }
-                                >
-                                  {value[feature] ? "Нет" : "Да"}
-                                </Button>
-                                <Button
-                                  color="error"
-                                  onClick={() => {
-                                    setCarConfigurations((prev) => {
-                                      const newConfigurations = [...prev];
-                                      const newConfig = newConfigurations.find(
-                                        (config) => config.name === item.name
-                                      );
-                                      delete newConfig.features[key][feature];
-
-                                      if (
-                                        Object.keys(newConfig.features[key])
-                                          .length === 0
-                                      ) {
-                                        delete newConfig.features[key];
-                                      }
-                                      return newConfigurations;
-                                    });
+                  <Box sx={{ marginTop: "40px" }} >
+                    <Box>
+                      <Select
+                        value={selectedFeature}
+                        onChange={(e) => setSelectedFeature(e.target.value)}
+                      >
+                        {configFeauteresTags.map((tag) => (
+                          <MenuItem key={tag} value={tag}>
+                            {tag}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <TextField
+                        placeholder="Введите значение конфигураций"
+                        value={feautereValue}
+                        onChange={(e) => setFeautereValue(e.target.value)}
+                      />
+                      <Button
+                        onClick={() =>
+                          setCarConfigurations((prev) => [
+                            ...prev.filter((config) => config.name !== item.name),
+                            {
+                              ...item,
+                              features: {
+                                ...item.features,
+                                [selectedFeature]: {
+                                  ...item.features[selectedFeature],
+                                  [feautereValue]: false,
+                                },
+                              },
+                            },
+                          ])
+                        }
+                      >
+                        Добавить конфигурацию
+                      </Button>
+                    </Box>
+                    <Box>
+                      {Object.entries(item.features).map(([key, value]) => {
+                        return (
+                          <Box key={key} sx={{}}>
+                            <Typography>{key}</Typography>
+                            <Box>
+                              {Object.keys(value).map((feature) => (
+                                <Box
+                                  key={feature}
+                                  sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    padding: "10px 0",
                                   }}
                                 >
-                                  Удалить
-                                </Button>
-                              </Box>
-                            ))}
+                                  <Typography>{feature}</Typography>
+                                  <Button
+                                    onClick={() =>
+                                      setCarConfigurations((prev) => [
+                                        ...prev.filter(
+                                          (config) => config.name !== item.name
+                                        ),
+                                        {
+                                          ...item,
+                                          features: {
+                                            ...item.features,
+                                            [selectedFeature]: {
+                                              ...item.features[selectedFeature],
+                                              [feautereValue]:
+                                                !item.features[selectedFeature][
+                                                feautereValue
+                                                ],
+                                            },
+                                          },
+                                        },
+                                      ])
+                                    }
+                                  >
+                                    {value[feature] ? "Нет" : "Да"}
+                                  </Button>
+                                  <Button
+                                    color="error"
+                                    onClick={() => {
+                                      setCarConfigurations((prev) => {
+                                        const newConfigurations = [...prev];
+                                        const newConfig = newConfigurations.find(
+                                          (config) => config.name === item.name
+                                        );
+                                        delete newConfig.features[key][feature];
+
+                                        if (
+                                          Object.keys(newConfig.features[key])
+                                            .length === 0
+                                        ) {
+                                          delete newConfig.features[key];
+                                        }
+                                        return newConfigurations;
+                                      });
+                                    }}
+                                  >
+                                    Удалить
+                                  </Button>
+                                </Box>
+                              ))}
+                            </Box>
                           </Box>
-                        </Box>
-                      );
-                    })}
+                        );
+                      })}
+                    </Box>
                   </Box>
                 </Box>
-              </Paper>
-            ))}
+              ))}
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </Paper>
+
       <Button variant="contained" type="submit">
         Создать модель
       </Button>

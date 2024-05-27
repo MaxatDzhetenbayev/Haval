@@ -16,10 +16,6 @@ export const Navbar = () => {
       title: "Модели",
       path: "/models",
     },
-    {
-      title: "Акции",
-      path: "/stocks",
-    },
   ];
 
   return <List sx={{ display: "flex" }}>

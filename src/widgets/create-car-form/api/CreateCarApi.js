@@ -1,19 +1,12 @@
 import { db } from "@/shared/api/firebaseConfig";
-import { handleUpload } from "@/shared/helpers/handleUploadFile";
 import { addDoc, collection } from "firebase/firestore";
 
 
 export const fetchCreateCar = async ({ modelInfo, specifications, configurations }) => {
   try {
-   //  const cardImageURl = await handleUpload(modelInfo.cardImage);
-   //  const videoURl = await handleUpload(modelInfo.video);
-   //  const imageURl = await handleUpload(modelInfo.image);
     const carRef = (
       await addDoc(collection(db, "cars"), {
         ...modelInfo,
-        cardImage: "",
-        image: "",
-        video: "",
       })
     ).id;
 
@@ -25,9 +18,8 @@ export const fetchCreateCar = async ({ modelInfo, specifications, configurations
     );
 
     configurations.forEach(async (config) => {
-      const configRef = (
-        await addDoc(collection(db, `cars/${carRef}/configurations`), config)
-      ).id;
+      await addDoc(collection(db, `cars/${carRef}/configurations`), config)
+
 
       // config.engineOptions.forEach(async (engine) => {
       //   await addDoc(
