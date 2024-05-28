@@ -11,7 +11,7 @@ export const SpecialOffers = () => {
   return (
     <Container sx={{ padding: "50px" }}>
       <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "500" }}>
-        Специальные предложиения
+        Специальные новости
       </Typography>
       <img
         src="./images/special-offers.png"
@@ -19,7 +19,7 @@ export const SpecialOffers = () => {
         style={{ width: "100%", margin: "40px 0px" }}
       />
       <Link
-        to="stocks"
+        to="/news"
         style={{
           textTransform: "uppercase",
           display: "flex",
@@ -28,7 +28,7 @@ export const SpecialOffers = () => {
           fontSize: "18px",
         }}
       >
-        Все специальные предложиения
+        Все Новости
         <KeyboardArrowRight />
       </Link>
     </Container>

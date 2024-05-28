@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,46 +10,26 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Box, Container, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const swiperList = [
-  {
-    position: "flex-start",
-    modelName: "M6",
-    price: 7990000,
-    path: "/models/m6",
-    image: "./images/image_b.webp",
-  },
-  {
-    position: "flex-end",
-    modelName: "Dargo",
-    price: 11990000,
-    path: "/models/dargo",
-    image: "./images/dargo.webp",
-  },
-  {
-    position: "flex-end",
-    modelName: "H6 GT",
-    price: 13790000,
-    path: "/models/m4",
-    image: "./images/h6gt.webp",
-  },
-  {
-    position: "flex-start",
-    modelName: "Dargo X",
-    price: 13090000,
-    path: "/models/m4",
-    image: "./images/dargox.webp",
-  },
-  {
-    position: "center",
-    modelName: "Jolion",
-    price: 5990000,
-    path: "/models/jolion",
-    image: "./images/jolion.webp",
-  },
-];
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/shared/api/firebaseConfig";
 
 export const HeroSwiper = () => {
+  const [cars, setCars] = useState([]);
+
+  const fetchCommonCarsInfo = async () => {
+    const cars = await getDocs(collection(db, "cars"));
+
+    const carsList = cars.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    });
+
+    setCars(carsList);
+  };
+
+  useEffect(() => {
+    fetchCommonCarsInfo();
+  }, []);
+
   const theme = useTheme();
 
   return (
@@ -60,7 +40,7 @@ export const HeroSwiper = () => {
       modules={[Pagination]}
       className="mySwiper"
     >
-      {swiperList.map((item, index) => (
+      {cars.map((item, index) => (
         <SwiperSlide key={index}>
           <Box
             sx={{
@@ -82,13 +62,13 @@ export const HeroSwiper = () => {
               }}
             >
               <Typography component="h1" variant="h1" fontWeight="600">
-                {item.modelName}
+                {item.name}
               </Typography>
               <Typography variant="body1" fontSize="46px">
-                от {item.price.toLocaleString()} тг.
+                от {item.starting_price.toLocaleString()} тг.
               </Typography>
               <Link
-                to={item.path}
+                to={`/models/${item.id}`}
                 style={{
                   marginTop: "20px",
                   padding: "10px 40px",

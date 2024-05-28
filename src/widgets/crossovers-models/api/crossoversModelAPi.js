@@ -6,14 +6,14 @@ export const crossoversModelAPi = async () => {
 
   const carsDocs = await getDocs(carsCollectionRef);
 
-
-
-  const cars = await Promise.all(carsDocs.docs.map(async (doc) => {
-    return {
-      id: doc.id,
-      ...doc.data(),
-    };
-  }));
+  const cars = await Promise.all(
+    carsDocs.docs.map(async (doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    })
+  );
 
   return cars;
 };

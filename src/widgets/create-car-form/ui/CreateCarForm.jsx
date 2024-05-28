@@ -33,6 +33,7 @@ const configFeauteresTags = [
 export const CreateCarForm = () => {
   const [carInfo, setCarInfo] = useState({
     name: "",
+    starting_price: 0,
     cardImage: null,
     image: null,
     video: null,
@@ -67,20 +68,15 @@ export const CreateCarForm = () => {
 
   const handleUploadMainImage = (url) => {
     setCarInfo((prev) => ({ ...prev, image: url }));
-    console.log("image");
   };
 
   const handleUploadCardImage = (url) => {
     setCarInfo((prev) => ({ ...prev, cardImage: url }));
-    console.log("card");
   };
 
   const handleUploadVideo = (url) => {
     setCarInfo((prev) => ({ ...prev, video: url }));
-    console.log("video");
   };
-
-  console.log(carInfo);
 
   return (
     <form onSubmit={handleCreateCar}>
@@ -102,6 +98,16 @@ export const CreateCarForm = () => {
           variant="standard"
           value={carInfo.name}
           onChange={(e) => setCarInfo({ ...carInfo, name: e.target.value })}
+        />
+        <TextField
+          required
+          placeholder="Начальная цена машины"
+          helperText="Введите начальную цену машины"
+          variant="standard"
+          value={carInfo.starting_price}
+          onChange={(e) =>
+            setCarInfo({ ...carInfo, starting_price: e.target.value })
+          }
         />
         <Paper
           elevation={2}
