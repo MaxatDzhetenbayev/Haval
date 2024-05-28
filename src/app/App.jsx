@@ -6,6 +6,7 @@ import { AdminLayout } from "./layouts/AdminLayout";
 import { AdminSignIn } from "@/widgets/admin-sign-in/ui/AdminSignIn";
 import { CreateCar } from "@/pages/admin/CreateCar";
 import { CreateNews } from "@/pages/admin/CreateNews";
+import { NewsDetail } from "@/pages/news-detail/NewsDetail";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path: "/news",
           element: <News />,
+        },
+        {
+          path: "/news/:id",
+          element: <NewsDetail />,
         },
         {
           path: "/models",
@@ -39,7 +44,7 @@ function App() {
       ],
     },
     {
-      element: <AdminLayout/>,
+      element: <AdminLayout />,
       children: [
         {
           path: "/admin/create-car",
@@ -49,9 +54,8 @@ function App() {
           path: "/admin/create-news",
           element: <CreateNews />,
         },
-      ]
+      ],
     },
-   
   ]);
 
   return <RouterProvider router={router}></RouterProvider>;

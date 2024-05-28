@@ -12,7 +12,6 @@ import React, { useState } from "react";
 import { fetchCreateCar } from "../api/CreateCarApi";
 import { UploadButton } from "@/app/feauters";
 
-
 const specificationTags = [
   "Тип двигателя",
   "Тип привода",
@@ -62,36 +61,40 @@ export const CreateCarForm = () => {
     await fetchCreateCar({
       modelInfo: carInfo,
       specifications: carSpecifications,
-      configurations: carConfigurations
+      configurations: carConfigurations,
     });
   };
 
-
-
   const handleUploadMainImage = (url) => {
-    setCarInfo((prev) => ({ ...prev, image: url }))
-    console.log("image")
+    setCarInfo((prev) => ({ ...prev, image: url }));
+    console.log("image");
   };
 
   const handleUploadCardImage = (url) => {
-    setCarInfo((prev) => ({ ...prev, cardImage: url }))
-    console.log("card")
-
+    setCarInfo((prev) => ({ ...prev, cardImage: url }));
+    console.log("card");
   };
 
   const handleUploadVideo = (url) => {
-    setCarInfo((prev) => ({ ...prev, video: url }))
-    console.log("video")
-
+    setCarInfo((prev) => ({ ...prev, video: url }));
+    console.log("video");
   };
 
-  console.log(carInfo)
-
+  console.log(carInfo);
 
   return (
     <form onSubmit={handleCreateCar}>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "20px", padding: "30px 0px 0px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>Основная информация</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          padding: "30px 0px 0px",
+        }}
+      >
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
+          Основная информация
+        </Typography>
         <TextField
           required
           placeholder="Название модели машины"
@@ -100,19 +103,46 @@ export const CreateCarForm = () => {
           value={carInfo.name}
           onChange={(e) => setCarInfo({ ...carInfo, name: e.target.value })}
         />
-        <Paper elevation={2} sx={{ display: "flex", flexDirection: "column", gap: "20px", padding: "20px" }}>
-          <Typography variant="h4" sx={{ textAlign: "center" }}>Изображения</Typography>
-          <Box sx={{ display: "flex", justifyContent: "center", gap: "15px", flexWrap: "wrap" }}>
-            <UploadButton onUploadComplete={handleUploadMainImage}>Загрузить главную картинку</UploadButton>
-            <UploadButton onUploadComplete={handleUploadCardImage}>Загрузить картинку карточки</UploadButton>
-            <UploadButton onUploadComplete={handleUploadVideo}>Загрузить видео</UploadButton>
+        <Paper
+          elevation={2}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            padding: "20px",
+          }}
+        >
+          <Typography variant="h4" sx={{ textAlign: "center" }}>
+            Изображения
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "15px",
+              flexWrap: "wrap",
+            }}
+          >
+            <UploadButton onUploadComplete={handleUploadMainImage}>
+              Загрузить главную картинку
+            </UploadButton>
+            <UploadButton onUploadComplete={handleUploadCardImage}>
+              Загрузить картинку карточки
+            </UploadButton>
+            <UploadButton onUploadComplete={handleUploadVideo}>
+              Загрузить видео
+            </UploadButton>
           </Box>
         </Paper>
       </Box>
       <Paper elevation={2} sx={{ marginTop: "30px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>Основные характеристики</Typography>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
+          Основные характеристики
+        </Typography>
         <Box sx={{ padding: "20px" }}>
-          <Typography variant="h5" sx={{ textAlign: "center" }}>Добавление характеристики</Typography>
+          <Typography variant="h5" sx={{ textAlign: "center" }}>
+            Добавление характеристики
+          </Typography>
           <Select
             value={selectedSpecification}
             onChange={(e) => setSelectedSpecification(e.target.value)}
@@ -176,7 +206,9 @@ export const CreateCarForm = () => {
         <Divider />
         <Box sx={{ padding: "20px" }}>
           <Box>
-            <Typography variant="h5" sx={{ textAlign: "center" }}>Добавление конфигурации</Typography>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              Добавление конфигурации
+            </Typography>
             <Box>
               <Select
                 value={selectedConfiguration}
@@ -189,9 +221,7 @@ export const CreateCarForm = () => {
                 ))}
               </Select>
               <Button
-                sx={{
-
-                }}
+                sx={{}}
                 onClick={() =>
                   setCarConfigurations((prev) => [
                     ...prev,
@@ -206,12 +236,9 @@ export const CreateCarForm = () => {
                 Добавить конфигурацию
               </Button>
             </Box>
-            <Box >
+            <Box>
               {carConfigurations.map((item) => (
-                <Box
-                  key={item.name}
-                  sx={{ padding: "20px 10px" }}
-                >
+                <Box key={item.name} sx={{ padding: "20px 10px" }}>
                   <Typography sx={{ textAlign: "center" }}>
                     Конфигурация - {item.name}
                   </Typography>
@@ -220,7 +247,10 @@ export const CreateCarForm = () => {
                       placeholder="Название двигателя"
                       value={engineOption.name}
                       onChange={(e) =>
-                        setEngineOption({ ...engineOption, name: e.target.value })
+                        setEngineOption({
+                          ...engineOption,
+                          name: e.target.value,
+                        })
                       }
                     />
                     <TextField
@@ -239,7 +269,10 @@ export const CreateCarForm = () => {
                           ...prev.filter((config) => config.name !== item.name),
                           {
                             ...item,
-                            engineOptions: [...item.engineOptions, engineOption],
+                            engineOptions: [
+                              ...item.engineOptions,
+                              engineOption,
+                            ],
                           },
                         ]);
                         setEngineOption({ name: "", price: 0 });
@@ -248,7 +281,7 @@ export const CreateCarForm = () => {
                       Добавить двигатель
                     </Button>
                   </Box>
-                  <Box sx={{ marginTop: "40px" }} >
+                  <Box sx={{ marginTop: "40px" }}>
                     <Box>
                       <Select
                         value={selectedFeature}
@@ -268,7 +301,9 @@ export const CreateCarForm = () => {
                       <Button
                         onClick={() =>
                           setCarConfigurations((prev) => [
-                            ...prev.filter((config) => config.name !== item.name),
+                            ...prev.filter(
+                              (config) => config.name !== item.name
+                            ),
                             {
                               ...item,
                               features: {
@@ -316,7 +351,7 @@ export const CreateCarForm = () => {
                                               ...item.features[selectedFeature],
                                               [feautereValue]:
                                                 !item.features[selectedFeature][
-                                                feautereValue
+                                                  feautereValue
                                                 ],
                                             },
                                           },
@@ -331,9 +366,11 @@ export const CreateCarForm = () => {
                                     onClick={() => {
                                       setCarConfigurations((prev) => {
                                         const newConfigurations = [...prev];
-                                        const newConfig = newConfigurations.find(
-                                          (config) => config.name === item.name
-                                        );
+                                        const newConfig =
+                                          newConfigurations.find(
+                                            (config) =>
+                                              config.name === item.name
+                                          );
                                         delete newConfig.features[key][feature];
 
                                         if (
