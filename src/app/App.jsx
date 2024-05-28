@@ -7,6 +7,7 @@ import { AdminSignIn } from "@/widgets/admin-sign-in/ui/AdminSignIn";
 import { CreateCar } from "@/pages/admin/CreateCar";
 import { CreateNews } from "@/pages/admin/CreateNews";
 import { NewsDetail } from "@/pages/news-detail/NewsDetail";
+import { Contact } from "@/pages/contact/Contact";
 
 function App() {
   const router = createBrowserRouter([
@@ -38,8 +39,8 @@ function App() {
           element: <TestDrive />,
         },
         {
-          path: "/signin",
-          element: <AdminSignIn />,
+          path: "/contacts",
+          element: <Contact />,
         },
       ],
     },
