@@ -178,8 +178,9 @@ export const ModelDetails = ({ carInfo }) => {
       </Box>
       <Container>
         <Box sx={{ padding: "50px 0px" }}>
-          <Box sx={{display: "flex", justifyContent: "flex-end"}}>
-            <a  href={file} style={{backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px"}} target="_blank">Прайс лист</a>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+            <a href="/test-drive" style={{ backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px" }}>Тест-драйв</a>
+            <a href={file} style={{ backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px" }} target="_blank">Прайс лист</a>
           </Box>
           {specifications && (
             <Box>
