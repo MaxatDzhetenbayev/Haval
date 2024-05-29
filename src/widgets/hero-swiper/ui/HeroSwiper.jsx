@@ -62,10 +62,18 @@ export const HeroSwiper = () => {
                 alignItems: item.position,
               }}
             >
-              <Typography component="h1" variant="h1" fontWeight="600" sx={{ fontSize: "clamp(46px, 6vw, 96px)" }}>
+              <Typography
+                component="h1"
+                variant="h1"
+                fontWeight="600"
+                sx={{ fontSize: "clamp(46px, 6vw, 96px)" }}
+              >
                 {item.name}
               </Typography>
-              <Typography variant="body1" sx={{ fontSize: "clamp(28px , 6vw, 43px)" }}>
+              <Typography
+                variant="body1"
+                sx={{ fontSize: "clamp(28px , 6vw, 43px)" }}
+              >
                 от {item.starting_price.toLocaleString()} тг.
               </Typography>
               <Link

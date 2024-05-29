@@ -9,8 +9,15 @@ export const SpecialOffers = () => {
   } = useTheme();
 
   return (
-    <Container sx={{ padding: "50px" }}>
-      <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "500" }}>
+    <Container sx={{ padding: "50px 10px" }}>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          fontWeight: "500",
+          fontSize: "clamp(32px, 4vw, 48px)",
+        }}
+      >
         Специальные новости
       </Typography>
       <img

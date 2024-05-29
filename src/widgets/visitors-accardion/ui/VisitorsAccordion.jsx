@@ -98,8 +98,11 @@ const accordionList = [
 
 export const VisitorsAccordion = () => {
   return (
-    <Container sx={{ padding: "50px" }}>
-      <Typography variant="h3" sx={{ textAlign: "center" }}>
+    <Container sx={{ padding: "50px 10px" }}>
+      <Typography
+        variant="h3"
+        sx={{ textAlign: "center", fontSize: "clamp(36px, 4vw, 52px)" }}
+      >
         Информация для посетителей автосалона
       </Typography>
       <Box sx={{ marginTop: "40px" }}>

@@ -1,14 +1,25 @@
-import { Box, Container, Paper, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 
 export const Location = () => {
-
-
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <Container sx={{ padding: "50px" }}>
-      <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "500" }}>
+    <Container sx={{ padding: "50px 10px" }}>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          fontWeight: "500",
+          fontSize: "clamp(36px, 4vw, 52px)",
+        }}
+      >
         Как найти центр Haval?
       </Typography>
       <Typography
@@ -19,7 +30,14 @@ export const Location = () => {
         вопросам приобретения нового автомобиля, сдачи вашего в trade-in, а
         также, чтобы записаться на плановое ТО.
       </Typography>
-      <Paper sx={{ display: "flex", height: "400px", marginTop: "30px", flexDirection: isMobile ? "column" : "row" }}>
+      <Paper
+        sx={{
+          display: "flex",
+          height: "400px",
+          marginTop: "30px",
+          flexDirection: isMobile ? "column" : "row",
+        }}
+      >
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
