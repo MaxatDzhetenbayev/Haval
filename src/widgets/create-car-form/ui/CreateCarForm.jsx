@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import { fetchCreateCar } from "../api/CreateCarApi";
 import { UploadButton } from "@/app/feauters";
+import { toast } from "react-toastify";
 
 const specificationTags = [
   "Тип двигателя",
@@ -39,7 +40,7 @@ export const CreateCarForm = () => {
     cardImage: null,
     image: null,
     video: null,
-    file: null
+    file: null,
   });
   const [carSpecifications, setCarSpecifications] = useState({});
   const [selectedSpecification, setSelectedSpecification] = useState(
@@ -67,6 +68,22 @@ export const CreateCarForm = () => {
       specifications: carSpecifications,
       configurations: carConfigurations,
     });
+
+    toast.success("Модель успешно создана");
+
+    setCarInfo({
+      name: "",
+      position: "flex-start",
+      starting_price: 0,
+      cardImage: null,
+      image: null,
+      video: null,
+      file: null,
+    });
+
+    setCarSpecifications({});
+    setCarConfigurations([]);
+    setEngineOption({ name: "", price: 0 });
   };
 
   const handleUploadMainImage = (url) => {
@@ -83,7 +100,7 @@ export const CreateCarForm = () => {
 
   const handleUploadFile = (url) => {
     setCarInfo((prev) => ({ ...prev, file: url }));
-  }
+  };
 
   return (
     <form onSubmit={handleCreateCar}>
@@ -118,9 +135,26 @@ export const CreateCarForm = () => {
         />
         <Typography>Расположения текста в слайдере</Typography>
         <ButtonGroup>
-          <Button variant={carInfo.position === "flex-start" ? "contained" : "outlined"} onClick={() => setCarInfo({ ...carInfo, position: "flex-start" })}>Слева</Button>
-          <Button variant={carInfo.position === "center" ? "contained" : "outlined"}  onClick={() => setCarInfo({ ...carInfo, position: "center" })}>Центр</Button>
-          <Button variant={carInfo.position === "flex-end" ? "contained" : "outlined"}  onClick={() => setCarInfo({ ...carInfo, position: "flex-end" })}>Справа</Button>
+          <Button
+            variant={
+              carInfo.position === "flex-start" ? "contained" : "outlined"
+            }
+            onClick={() => setCarInfo({ ...carInfo, position: "flex-start" })}
+          >
+            Слева
+          </Button>
+          <Button
+            variant={carInfo.position === "center" ? "contained" : "outlined"}
+            onClick={() => setCarInfo({ ...carInfo, position: "center" })}
+          >
+            Центр
+          </Button>
+          <Button
+            variant={carInfo.position === "flex-end" ? "contained" : "outlined"}
+            onClick={() => setCarInfo({ ...carInfo, position: "flex-end" })}
+          >
+            Справа
+          </Button>
         </ButtonGroup>
         <Paper
           elevation={2}
@@ -373,7 +407,7 @@ export const CreateCarForm = () => {
                                               ...item.features[selectedFeature],
                                               [feautereValue]:
                                                 !item.features[selectedFeature][
-                                                feautereValue
+                                                  feautereValue
                                                 ],
                                             },
                                           },
