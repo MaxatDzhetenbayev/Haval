@@ -5,6 +5,7 @@ import {
   Location,
   VisitorsAccordion,
 } from "@/widgets";
+import { BannerTest } from "@/widgets/banner-test/ui/BannerTest";
 import { Box } from "@mui/material";
 import React from "react";
 
@@ -14,6 +15,7 @@ export const Home = () => {
       <HeroSwiper />
       <ModelsList />
       <SpecialOffers />
+      <BannerTest/>
       <Location />
       <VisitorsAccordion />
     </Box>
