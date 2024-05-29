@@ -1,11 +1,10 @@
 import { CrossoverModels } from "@/widgets/crossovers-models";
-import { PickupsModels } from "@/widgets/pickups-models";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
 export const ModelsList = () => {
   return (
-    <Box sx={{ padding: "50px " }}>
+    <Box sx={{ padding: "50px 20px" }}>
       <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "500" }}>
         Модельньный ряд
       </Typography>

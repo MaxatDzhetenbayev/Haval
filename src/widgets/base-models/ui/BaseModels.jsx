@@ -4,7 +4,7 @@ import React from "react";
 
 export const BaseModels = ({ items }) => {
   return (
-    <Container sx={{ padding: "40px 10px" }}>
+    <Container sx={{ padding: "40px 0px" }}>
       <Typography variant="h4">Кроссоверы и внедорожники</Typography>
       <Box
         sx={{

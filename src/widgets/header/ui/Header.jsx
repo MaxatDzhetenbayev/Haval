@@ -1,8 +1,13 @@
 import { Logo, Navbar } from "@/entities";
-import { AppBar, Container,Toolbar } from "@mui/material";
+import { DrawerNavbar } from "@/entities/navbar/DrawerNavbar";
+import { AppBar, Container, Toolbar, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export const Header = () => {
+
+
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -14,7 +19,10 @@ export const Header = () => {
           }}
         >
           <Logo />
-          <Navbar />
+          {
+            isMobile ? <DrawerNavbar /> : <Navbar />
+          }
+
         </Container>
       </Toolbar>
     </AppBar>

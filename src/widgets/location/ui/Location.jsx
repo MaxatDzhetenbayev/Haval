@@ -1,7 +1,11 @@
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box, Container, Paper, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export const Location = () => {
+
+
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <Container sx={{ padding: "50px" }}>
       <Typography variant="h3" sx={{ textAlign: "center", fontWeight: "500" }}>
@@ -15,7 +19,7 @@ export const Location = () => {
         вопросам приобретения нового автомобиля, сдачи вашего в trade-in, а
         также, чтобы записаться на плановое ТО.
       </Typography>
-      <Paper sx={{ display: "flex", height: "400px", marginTop: "30px" }}>
+      <Paper sx={{ display: "flex", height: "400px", marginTop: "30px", flexDirection: isMobile ? "column" : "row" }}>
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
