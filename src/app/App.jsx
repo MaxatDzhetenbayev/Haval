@@ -3,14 +3,13 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home, Models, News, Product, TestDrive } from "@pages/index";
 import { BaseLayout } from "@layouts/BaseLayout";
 import { AdminLayout } from "./layouts/AdminLayout";
-import { AdminSignIn } from "@/widgets/admin-sign-in/ui/AdminSignIn";
 import { CreateCar } from "@/pages/admin/CreateCar";
 import { CreateNews } from "@/pages/admin/CreateNews";
 import { NewsDetail } from "@/pages/news-detail/NewsDetail";
 import { Contact } from "@/pages/contact/Contact";
 import { SignIn } from "@/pages/sign-in/SignIn";
 import { Admin } from "@/pages/admin/Admin";
-
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const router = createBrowserRouter([
     {
@@ -46,7 +45,7 @@ function App() {
         },
         {
           path: "/signin",
-          element: <SignIn   />,
+          element: <SignIn />,
         }
       ],
     },
@@ -55,7 +54,7 @@ function App() {
       children: [
         {
           path: "/admin",
-          element: <Admin/>,
+          element: <Admin />,
         },
         {
           path: "/admin/create-car",

@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import { Header } from "@widgets/header";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 export const BaseLayout = () => {
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export const BaseLayout = () => {
         <Outlet />
       </Box>
       <Footer />
+      <ToastContainer />
     </Box>
   );
 };
