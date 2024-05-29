@@ -31,6 +31,9 @@ export const AdminHeader = () => {
           <Typography>Админ панель Haval</Typography>
           <List sx={{ display: "flex" }}>
             <ListItem key="create-car">
+              <Link to="/admin">Главная</Link>
+            </ListItem>
+            <ListItem key="create-car">
               <Link to="/admin/create-car">Машины</Link>
             </ListItem>
             <ListItem key="create-news">

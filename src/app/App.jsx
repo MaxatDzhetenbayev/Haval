@@ -8,6 +8,8 @@ import { CreateCar } from "@/pages/admin/CreateCar";
 import { CreateNews } from "@/pages/admin/CreateNews";
 import { NewsDetail } from "@/pages/news-detail/NewsDetail";
 import { Contact } from "@/pages/contact/Contact";
+import { SignIn } from "@/pages/sign-in/SignIn";
+import { Admin } from "@/pages/admin/Admin";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,11 +44,19 @@ function App() {
           path: "/contacts",
           element: <Contact />,
         },
+        {
+          path: "/signin",
+          element: <SignIn   />,
+        }
       ],
     },
     {
       element: <AdminLayout />,
       children: [
+        {
+          path: "/admin",
+          element: <Admin/>,
+        },
         {
           path: "/admin/create-car",
           element: <CreateCar />,
