@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   Divider,
   MenuItem,
   Paper,
@@ -33,6 +34,7 @@ const configFeauteresTags = [
 export const CreateCarForm = () => {
   const [carInfo, setCarInfo] = useState({
     name: "",
+    position: "flex-start",
     starting_price: 0,
     cardImage: null,
     image: null,
@@ -109,6 +111,12 @@ export const CreateCarForm = () => {
             setCarInfo({ ...carInfo, starting_price: e.target.value })
           }
         />
+        <Typography>Расположения текста в слайдере</Typography>
+        <ButtonGroup>
+          <Button variant={carInfo.position === "flex-start" ? "contained" : "outlined"} onClick={() => setCarInfo({ ...carInfo, position: "flex-start" })}>Слева</Button>
+          <Button variant={carInfo.position === "center" ? "contained" : "outlined"}  onClick={() => setCarInfo({ ...carInfo, position: "center" })}>Центр</Button>
+          <Button variant={carInfo.position === "flex-end" ? "contained" : "outlined"}  onClick={() => setCarInfo({ ...carInfo, position: "flex-end" })}>Справа</Button>
+        </ButtonGroup>
         <Paper
           elevation={2}
           sx={{
@@ -357,7 +365,7 @@ export const CreateCarForm = () => {
                                               ...item.features[selectedFeature],
                                               [feautereValue]:
                                                 !item.features[selectedFeature][
-                                                  feautereValue
+                                                feautereValue
                                                 ],
                                             },
                                           },
