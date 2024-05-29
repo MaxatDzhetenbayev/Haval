@@ -39,6 +39,7 @@ export const CreateCarForm = () => {
     cardImage: null,
     image: null,
     video: null,
+    file: null
   });
   const [carSpecifications, setCarSpecifications] = useState({});
   const [selectedSpecification, setSelectedSpecification] = useState(
@@ -79,6 +80,10 @@ export const CreateCarForm = () => {
   const handleUploadVideo = (url) => {
     setCarInfo((prev) => ({ ...prev, video: url }));
   };
+
+  const handleUploadFile = (url) => {
+    setCarInfo((prev) => ({ ...prev, file: url }));
+  }
 
   return (
     <form onSubmit={handleCreateCar}>
@@ -127,7 +132,7 @@ export const CreateCarForm = () => {
           }}
         >
           <Typography variant="h4" sx={{ textAlign: "center" }}>
-            Изображения
+            Файлы
           </Typography>
           <Box
             sx={{
@@ -145,6 +150,9 @@ export const CreateCarForm = () => {
             </UploadButton>
             <UploadButton onUploadComplete={handleUploadVideo}>
               Загрузить видео
+            </UploadButton>
+            <UploadButton onUploadComplete={handleUploadFile}>
+              Загрузить файл с ценами
             </UploadButton>
           </Box>
         </Paper>

@@ -19,7 +19,6 @@ export const UploadButton = ({ onUploadComplete, children }) => {
     return (
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
             <input
-                required
                 style={{ display: 'none' }}
                 ref={inputRef}
                 type="file"

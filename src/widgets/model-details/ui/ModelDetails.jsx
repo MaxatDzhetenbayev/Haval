@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const CarConfigurations = ({ configurations }) => {
   const renderEngineOptions = () => {
@@ -125,7 +126,8 @@ const CarConfigurations = ({ configurations }) => {
 };
 
 export const ModelDetails = ({ carInfo }) => {
-  const { name, video, specifications, configurations } = carInfo;
+  const navigate = useNavigate();
+  const { name, video, specifications, configurations, file } = carInfo;
 
   return (
     <Box>
@@ -176,6 +178,9 @@ export const ModelDetails = ({ carInfo }) => {
       </Box>
       <Container>
         <Box sx={{ padding: "50px 0px" }}>
+          <Box sx={{display: "flex", justifyContent: "flex-end"}}>
+            <a  href={file} style={{backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px"}} target="_blank">Прайс лист</a>
+          </Box>
           {specifications && (
             <Box>
               <Typography

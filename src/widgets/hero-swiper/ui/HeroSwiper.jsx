@@ -46,6 +46,7 @@ export const HeroSwiper = () => {
             sx={{
               backgroundImage: `url(${item.image})`,
               backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               height: "calc(100vh - 64px)",
               display: "flex",
