@@ -12,8 +12,10 @@ import { Box, Container, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/shared/api/firebaseConfig";
+import { useTranslation } from "react-i18next";
 
 export const HeroSwiper = () => {
+  const { t } = useTranslation();
   const [cars, setCars] = useState([]);
 
   const fetchCommonCarsInfo = async () => {
@@ -74,7 +76,7 @@ export const HeroSwiper = () => {
                 variant="body1"
                 sx={{ fontSize: "clamp(28px , 6vw, 43px)" }}
               >
-                от {item.starting_price.toLocaleString()} тг.
+                {t("starting_price", { price: item.starting_price })}
               </Typography>
               <Link
                 to={`/models/${item.id}`}
@@ -86,7 +88,7 @@ export const HeroSwiper = () => {
                   borderRadius: "5px",
                 }}
               >
-                Подробнее
+                {t("more")}
               </Link>
             </Container>
           </Box>

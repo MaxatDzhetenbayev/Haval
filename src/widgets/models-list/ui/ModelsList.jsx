@@ -1,8 +1,11 @@
 import { CrossoverModels } from "@/widgets/crossovers-models";
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const ModelsList = () => {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ padding: "50px 0px" }}>
       <Typography
@@ -13,11 +16,10 @@ export const ModelsList = () => {
           fontSize: "clamp(36px, 4vw, 52px)",
         }}
       >
-        Модельньный ряд
+        {t("models")}
       </Typography>
       <Typography sx={{ textAlign: "center", marginTop: "30px" }}>
-        Выбор за вами! Оцените технологичные кроссоверы, пикапы и внедорожник
-        Haval, адаптированные к казахстанским условиям.
+        {t("models_text")}
       </Typography>
       <CrossoverModels />
     </Box>

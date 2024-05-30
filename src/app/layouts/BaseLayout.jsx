@@ -6,10 +6,9 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 export const BaseLayout = () => {
-
   useEffect(() => {
     handleSetUserVisit();
-  })
+  });
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>

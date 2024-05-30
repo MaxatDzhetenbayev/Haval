@@ -6,8 +6,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const Location = () => {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
@@ -20,15 +22,13 @@ export const Location = () => {
           fontSize: "clamp(36px, 4vw, 52px)",
         }}
       >
-        Как найти центр Haval?
+        {t("location_head")}
       </Typography>
       <Typography
         variant="body1"
         sx={{ textAlign: "center", marginTop: "20px" }}
       >
-        Вы всегда можете обратиться в официальный дилерский центр HAVAL по
-        вопросам приобретения нового автомобиля, сдачи вашего в trade-in, а
-        также, чтобы записаться на плановое ТО.
+        {t("location_text")}
       </Typography>
       <Paper
         sx={{

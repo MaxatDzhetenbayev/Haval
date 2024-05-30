@@ -15,7 +15,7 @@ export const Home = () => {
       <HeroSwiper />
       <ModelsList />
       <SpecialOffers />
-      <BannerTest/>
+      <BannerTest />
       <Location />
       <VisitorsAccordion />
     </Box>

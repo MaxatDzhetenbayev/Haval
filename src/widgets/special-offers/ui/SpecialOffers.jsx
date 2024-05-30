@@ -1,9 +1,11 @@
 import { KeyboardArrowRight } from "@mui/icons-material";
 import { Container, Typography, useTheme } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export const SpecialOffers = () => {
+  const { t } = useTranslation();
   const {
     palette: { primary },
   } = useTheme();
@@ -18,10 +20,10 @@ export const SpecialOffers = () => {
           fontSize: "clamp(32px, 4vw, 48px)",
         }}
       >
-        Специальные новости
+        {t("special_news")}
       </Typography>
       <img
-        src="./images/special-offers.png"
+        src="images/special-offers.png"
         alt=""
         style={{ width: "100%", margin: "20px 0px" }}
       />
@@ -35,7 +37,7 @@ export const SpecialOffers = () => {
           fontSize: "18px",
         }}
       >
-        Все Новости
+        {t("all_news")}
         <KeyboardArrowRight />
       </Link>
     </Container>

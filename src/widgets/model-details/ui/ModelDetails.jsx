@@ -156,31 +156,41 @@ export const ModelDetails = ({ carInfo }) => {
           <source type="video/mp4" src={video} />
         </video>
         <Container>
-          <Box paddingTop="100px">
+          <Box paddingTop="250px">
             <Typography variant="h1" sx={{ fontWeight: "400" }}>
               {name}
             </Typography>
-            <Button
-              variant="contained"
-              sx={{
-                marginTop: "25px",
-                color: "#fff",
-                backgroundColor: "#000",
-                fontWeight: "600",
-                fontSize: "18px",
-                padding: "10px 30px",
-              }}
-            >
-              Отправить заявку
-            </Button>
           </Box>
         </Container>
       </Box>
       <Container>
         <Box sx={{ padding: "50px 0px" }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-            <a href="/test-drive" style={{ backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px" }}>Тест-драйв</a>
-            <a href={file} style={{ backgroundColor: "#000", color: "#fff", padding: "10px 30px", borderRadius: "5px" }} target="_blank">Прайс лист</a>
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}
+          >
+            <a
+              href="/test-drive"
+              style={{
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "10px 30px",
+                borderRadius: "5px",
+              }}
+            >
+              Тест-драйв
+            </a>
+            <a
+              href={file}
+              style={{
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "10px 30px",
+                borderRadius: "5px",
+              }}
+              target="_blank"
+            >
+              Прайс лист
+            </a>
           </Box>
           {specifications && (
             <Box>
